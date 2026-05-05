@@ -147,3 +147,62 @@ docker exec -it (id do container) (pasta em que colocamos o workdir) //bin/sh (o
 Dessa forma nos disponibiliza o diretorio de trabalho (/usr/src/app #)
 
 E caso desejado para sair do diretorio de trabalho apenas digitamos "exit"
+
+=============================================================================================================================================================================================================================
+
+COMO CRIAR VOLUME
+
+O codigo para criacao de volume segue a seguinte sintaxe:
+
+docker volume create nome-do-volume
+
+Para inspecionar a criacao do mesmo digitamos:
+
+docker volume inspect nome-do-volume
+
+Para fazermos o container utilizar o volume criamos um container novo com a adicao dessa sintaxe
+
+-v api-volume:/usr/src/app
+
+digitando com totalidade dessa forma:
+
+docker run -v api-volume:/usr/src/app -p 3333:3333 -d api
+
+Caso queiramos ver se foi adicionado o volume ao container podemos inspecionar da seguinte maneira
+
+docker container inspect (id do container)
+
+procuramos a linha nomeada como mounts e checamos o nome, dando esse retorno:
+
+"Mounts": [{
+    "Type": "volume",
+    "Name": "api-volume",
+    "Source": "/var/lib/docker/volumes/nome-do-volume/_data",
+    "Destination": "/usr/src/app",
+    "Driver": "local",
+    "Mode": "z",
+    "RW": true,
+    "Propagation": ""
+}]
+
+Lembrando que o volume serve para armazenar dados desejados criaremos um dado direto no terminal (nao convencional e tambem nao recomendado)
+
+Dentro do nosso workdir digitamos essa linha de codigo
+
+touch ls teste.txt
+
+Conferimos dentro do nosso workdir com o ls a permanecia do dado criado
+
+Para a listagem de volumes criados utilizamos:
+
+docker volume ls
+
+Para a remocao utilizamos 
+
+docker volume rm nome-do-volume
+
+Lembrando que caso esteja sendo utilizado em algum container ele nao sera apagado, mesmo que o container esteja parado ele nao sera removido, sendo necessario remover o container para conseguir remover o volume
+
+Utilizando o codigo de remocao geral de containers podemos ter a certeza que ele sera apagado, segue o codigo abaixo:
+
+docker container prune (confirme ao executar-lo)
