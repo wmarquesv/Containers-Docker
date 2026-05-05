@@ -39,3 +39,15 @@ container: e a instancia de uma imagem em execucao. Ou seja, e o ambiente de uma
 
 Maquina hospedeira (host):
 Pode ser uma maquina virtual rodando em uma maquina fisica como um servidor ou diretamente na maquina fisica como o nosso computador
+
+=============================================================================================================================================================================================================================
+
+Utilizamos esse comando para dar inicio a nossa imagem docker 
+
+docker build -t api .
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+para obtermos o nosso container utilizamos esse codigo
+
+docker run -p (portadefinida no projeto)3333:3333(porta desejada a ser utilizada na sua maquina) api (nome do projeto) 
