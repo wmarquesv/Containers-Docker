@@ -1,0 +1,41 @@
+Docker (sistema de virtualizacao nao convencional)
+
+-- Virtualizacao convencional -- 
+
+Software de gerenciamento de maquinas virtuais(exemplos: VirtualBox, VMWare, Parallels e etc)
+
+Para cada maquina virtual existe a instalacao completa do Sistema Operacional que desejamos virtualizar, alem de ter o proprio
+hardware virtualizado
+
+-- Containers (Docker utiliza) -- 
+
+Proporciona um ambiente isolado com os recursos que a sua aplicacao precisa para funcionar(como codigo, dependencias e
+bibliotecas necessarias para executar a aplicacao)  
+
+Isolamento 
+Kernel: O kernel e o coracao de um sistema operacional que faz a ponte entre o software e o hardware e controla processos, memoria, dispositivos e chamadas do sistema.
+
+CGroups: E uma funcionalidade que controla e limita a alocacao de recrusos tais como CPU, memoria, etc. O objetivo e nao deixar que um container monopolize os recursos do host para ter um ambiente equilibrado.
+
+Namespaces: Isola os recursos, ou seja, um container so "enxerga" os seus proprios processos e arquivos
+
+-- Porque usar o DOCKER? --
+
+resolve o problema: "na minha maquina funciona" 
+
+Com a criacao de um container com o docker na precisamos nos preocupar com pre-requisitos instalados em outro ambiente, versao do S.O., permissionamento e etc.
+
+minimiza muito as divergencias entre os ambientes
+
+-- Conceitos do DOCKER -- 
+
+Dockerfile:
+contem todas as informacoes necessarias para gerar a nossa imagem docker
+
+Imagem:
+contem as informacoes de um ambiente com tudo que a nossa aplicacao precisa para executar, por exemplo, codigo, dependencias e bibliotecas necessarios.
+
+container: e a instancia de uma imagem em execucao. Ou seja, e o ambiente de uma imagem executando.
+
+Maquina hospedeira (host):
+Pode ser uma maquina virtual rodando em uma maquina fisica como um servidor ou diretamente na maquina fisica como o nosso computador
