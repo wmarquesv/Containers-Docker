@@ -131,3 +131,19 @@ docker image ls
 Para a remocao usamos rm(i = imagem)
 
 docker rmi (id da imagem)
+
+=============================================================================================================================================================================================================================
+
+EFEMERIDADE EM CONTAINERS 
+
+efemero - De curta duração; breve, transitório, temporario: sucesso efêmero.
+
+Containers sao projetados para serem efemeros(descartaveis), portando e recomendado utilizar ambiente externo ao container caso necessario armazenar dados
+
+Para termos acesso ao diretorio de trabalho do docker utilizamos o seguinte codigo:
+
+docker exec -it (id do container) (pasta em que colocamos o workdir) //bin/sh (ou apenas sh)
+
+Dessa forma nos disponibiliza o diretorio de trabalho (/usr/src/app #)
+
+E caso desejado para sair do diretorio de trabalho apenas digitamos "exit"
