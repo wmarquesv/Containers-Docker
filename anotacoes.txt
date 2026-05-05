@@ -51,3 +51,24 @@ docker build -t api .
 para obtermos o nosso container utilizamos esse codigo
 
 docker run -p (portadefinida no projeto)3333:3333(porta desejada a ser utilizada na sua maquina) api (nome do projeto) 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+utilizando o codigo
+
+docker run -p 3333:3333 api
+
+conseguimos rodar nosso projeto porem com o terminal travado
+
+assim como se usarmos o codigo com o id da imagem desejada
+
+docker run -p 3333:3333 052d13443cb4 
+
+tambem teremos o terminal travado
+
+ja utilizando o codigo com o -d nos deixa utilizar o mesmo terminal sem bloquear-lo
+
+docker run -p 3333:3333 -d api 
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
