@@ -206,3 +206,16 @@ Lembrando que caso esteja sendo utilizado em algum container ele nao sera apagad
 Utilizando o codigo de remocao geral de containers podemos ter a certeza que ele sera apagado, segue o codigo abaixo:
 
 docker container prune (confirme ao executar-lo)
+
+=============================================================================================================================================================================================================================
+
+Utilizando imagem com POSTGRES
+
+Para fazermos o download pesquisamos no docker a versao desejada, seja ela a oficial do POSTGRES ou as corrigidas com mais frequencias pelas empresas
+
+O download do mesmo e feito com o codigo que segue essa sintaxe
+
+docker run --name db-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d bitnami/postgresql:latest
+
+Com o docker ls podemos listar para ver se foi adicionado o container importado
+
