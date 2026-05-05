@@ -72,3 +72,62 @@ docker run -p 3333:3333 -d api
 
 ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+Com o codigo docker logs (id do container)
+
+docker logs 51745df24a12 
+
+Ele exibira a execucao referente a esse container
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Para vermos o historico geral da imagem utilizamos o 
+
+docker history (nome da imagem) api
+
+Com isso ele exibira para nos o historico de cada acao da imagem
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Quando quisermos pausar o projeto utilizamos o codigo
+
+docker pause (id do container)
+
+E para retornar com o projeto utilizamos o 
+
+docker unpause (id do container)
+
+Para interropermos o projeto utilizamos o 
+
+docker stop (id do container)
+
+Para listarmos todos os containers ate os que nao estao em execucao:
+
+docker ps -a
+
+Podemos tambem iniciar o mesmo container com o id que a listagem geral nos proporciona, utilizamos o 
+
+docker start (id do container)
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+Remocao de container ou imagem
+
+CONTAINER
+
+docker rm (id do container eu quero remover)
+
+Porem para realizar a remocao dele precisamos interromper a execucao do container com o codigo explicado acima
+
+Entretanto, podemos tambem forcar a remocao dele apenas adicionando o comando -f (force)
+
+docker rm -f (id do container)
+
+IMAGEM
+
+Caso necessario a listagem da imagem para retirar o id desejado, utilizamos o codigo
+
+docker image ls
+
+Para a remocao usamos rm(i = imagem)
+
+docker rmi (id da imagem)
