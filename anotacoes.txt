@@ -219,3 +219,142 @@ docker run --name db-postgres -e POSTGRES_USER=postgres -e POSTGRES_PASSWORD=pos
 
 Com o docker ls podemos listar para ver se foi adicionado o container importado
 
+=============================================================================================================================================================================================================================
+
+DOCKER COMPOSE
+
+O docker compose e uma ferramenta para o gerenciamento, definicoes e execucao das aplicacoes de varios containers docker
+
+No compose, um arquivo YAML e usado para configurar os servicos do aplicativo. Em seguidavoce cria e inicia todos os servicos com base na sua configuracao executando um so comando 
+
+CRIACAO DE UM DOCUMENTO DOCKER-COMPOSE 
+
+Selecionamos a versao, adicionamos um servico, levando em conta que cada servico e um container que subiremos. 
+Com muita atencao com a identacao, a identacao e usada para definir a hierarquia:
+
+version: "3.9"
+
+services: 
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+
+Temos duas configuracoes = context e dockerfile
+Ambas estao abaixo da hierarquia da build, que e pertencente a api, e a api e um servico
+      
+api: = container da sua aplicação
+context = onde ele tem que buscar o arquivo desejado (. define como o caminho onde o arquivo docker-compose esta)
+dockerfile = arquivo desejado dentro do contexto
+working_dir: = onde o terminal abre dentro do container
+volumes: = conecta seu PC com o container
+
+Definimos a image para criacao do container e o nomeamos, definimos a porta e a dependencia para rodar-lo
+
+api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+
+    working_dir: /usr/src/app
+    volumes:
+      - .:/usr/src/app
+      - /usr/src/app/node_modules
+    container_name: api
+    ports:
+      - "3333:3333"
+    depends_on:
+      - postgres
+    command: npm start
+
+(sempre respeitando a linha de hierarquia)
+
+Agora criaremos o banco de dados que a nossa api e dependente
+
+Definimos primeiramente a image que iremos importa-la, assim como mais cedo a bitnami, nomeamos o container e definimos a porta padrao postgres
+
+postgres:
+    image: "bitnami/postgresql:latest"
+    container_name: postgres
+    ports:
+      - "5432:5432"
+
+Para adicionarmos as informacoes necessarias do postgres (usuario e senha) adicionamos o enviroment
+
+environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: postgres
+      POSTGRESQL_DATABASE: api
+
+POSTGRES_DB: api = nomenclatura
+
+Mapeamos tambem um volume para que a informacao resgatada no container nao seja perdida
+
+volumes:
+      - database: /var/lib/postgresql/data
+
+E criamos o volume sem conteudo porque o mapeamento ja faz por si so
+
+volumes:
+  database:
+
+com o codigo postgres ficando assim
+
+    postgres:
+    image: "bitnami/postgresql:latest"
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: postgres
+      POSTGRESQL_DATABASE: api
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
+
+com o codigo em sua totalidade dessa forma:
+
+version: "3.9"
+
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: node:latest
+    container_name: api
+    ports:
+      - "3333:3333"
+    depends_onn:
+      - postgres
+
+  postgres:
+    image: "bitnami/postgresql:latest"
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRESQL_USERNAME: postgres
+      POSTGRESQL_PASSWORD: postgres
+      POSTGRESQL_DATABASE: api
+    volumes:
+      - database:/var/lib/postgresql/data
+
+volumes:
+  database:
+
+
+EXECUCAO DO ARQUIVO
+
+utilizamos esse codigo como -d para nao travar o terminal
+docker-compose up -d
+
+=============================================================================================================================================================================================================================
